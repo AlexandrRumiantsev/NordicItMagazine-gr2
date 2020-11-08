@@ -51,18 +51,26 @@ class User extends db{
         }
         
     }
-    function login($connect){
-        $log = $_REQUEST['password'];
+    function login(){
+        $log = $_REQUEST['pass'];
         $pass = $_REQUEST['login'];
-        $sql = "SELECT * FROM `users` WHERE login = '$log' AND password = '{$pass}'";
+
+        $connect = parent::extendConnect('localhost');
+
+        $sql = "SELECT * FROM `user` WHERE LOGIN = '$log' AND PASSWORD = '{$pass}'";
+
         $result = mysqli_query($connect, $sql); 
 
         if($result){
-            echo 'Запрос успешен!';
-            while ($row = $result->fetch_assoc()) {
-               $res = json_encode($row);
-               setcookie('user', $res);
-            }
+            //echo 'Запрос успешен!';
+            if($result -> num_rows > 0){
+              while ($row = $result->fetch_assoc()) {
+                
+               //$res = json_encode($row);
+               //setcookie('user', $res);
+              }  
+            }else 'USER NOT FOUND';
+            
             
         }else echo $sql; 
     }

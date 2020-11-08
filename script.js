@@ -1,3 +1,7 @@
+const HOST = window.location.host;
+const PROTOCOL = window.location.protocol;
+
+
 const panelSwitch = function() {
     document.querySelector(
             '.popupp-container form.active'
@@ -29,6 +33,7 @@ function sendData(form, type, url) {
 
     const XHR = new XMLHttpRequest();
     XHR.addEventListener( "load", function(event) {
+      console.log(event.srcElement.response);
       overlay.classList.remove('active');
       popupp.classList.toggle('active');
     } );
@@ -43,14 +48,21 @@ function sendData(form, type, url) {
 
 document.forms.reg.onsubmit = function(e){
     e.preventDefault();
+    
     sendData(
         new FormData(this),
         'POST',
-        'http://192.168.64.3/api/controller.php'
+        `${PROTOCOL}//${HOST}/api/controller.php`
     )
 };
 
 
 document.forms.aut.onsubmit = function(e){
     e.preventDefault();
+
+    sendData(
+        new FormData(this),
+        'POST',
+        `${PROTOCOL}//${HOST}/api/controller.php`
+    )
 };

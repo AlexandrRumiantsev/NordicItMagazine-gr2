@@ -1,5 +1,8 @@
 <?php
 error_reporting(E_ERROR);
+session_start();
+
+
 ?>
 <header>
     <div>Логотип</div>
@@ -24,6 +27,7 @@ error_reporting(E_ERROR);
         <input name='login'></input>
         <input name='pass'></input>
         <input type='submit'></input>
+        <input type='hidden' name='action' value='aut'></input>
     </form>
     <form id='reg'>
         <h2>Регистрация</h2>

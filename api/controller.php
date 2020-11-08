@@ -1,6 +1,6 @@
 <?php
      
-    var_dump($_REQUEST);
+    
     switch ($_REQUEST['action']){
         case 'catalog':
             header("Access-Control-Allow-Origin: *");
@@ -18,6 +18,11 @@
             include_once('./user.php');
             $user = new User;
             $user -> save(false);
+        case 'aut':
+            //var_dump($_REQUEST);
+            include_once('./user.php'); 
+            $user = new User;  
+            $user -> login(false); 
         break;    
     }
     
