@@ -66,10 +66,11 @@ class User extends db{
             if($result -> num_rows > 0){
               while ($row = $result->fetch_assoc()) {
                 
-               //$res = json_encode($row);
+                //var_dump($row);
+               echo json_encode($row);
                //setcookie('user', $res);
               }  
-            }else 'USER NOT FOUND';
+            }else echo 'USER NOT FOUND';
             
             
         }else echo $sql; 
