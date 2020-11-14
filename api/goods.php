@@ -110,10 +110,13 @@ class goods extends db{
       return $result;
     }
     
-     function getList(){
+     function getList($category){
          $link = parent::extendConnect('localhost');
-         $result = mysqli_query($link, "SELECT * FROM goods");
-         return $result->fetch_assoc();
+         $result = mysqli_query(
+            $link, 
+            "SELECT * FROM goods WHERE category='".$category."'"
+        );
+         return $result;
      }
 
     /**

@@ -5,8 +5,8 @@ session_start();
 
 ?>
 <header>
-    <div>Логотип</div>
     <nav>
+        <div class="logo"></div>
         <ul>
             <li><a href='#'>Женщинам</a></li>
             <li><a href='#'>Мужчинам</a></li>
@@ -14,11 +14,18 @@ session_start();
             <li><a href='#'>Новинки</a></li>
             <li><a href='#'>О Нас</a></li>
         </ul>
-    <nav>
-    <div class='header__button'>
-        <a href="#">Войти</a>
-        <a href="#">Корзина (0)</a>
-    </div>
+        <div class='header__button'>
+            <div class="header__enter">
+                <img src="../img/icons/account.png">
+                <a href="#">Войти</a>
+            </div>
+            <div class="header__basket">
+            <img src="../img/icons/bascet.png">
+                <a href="#">Корзина (0)</a>
+            </div>
+            
+        </div>
+    </nav>
 </header>
 
 <div class='popupp-container'>
@@ -52,5 +59,5 @@ session_start();
     <img src="/img/loader.gif">
 </div>
 
-<script src='/script.js'></script>
+<script src='script.js'></script>
 

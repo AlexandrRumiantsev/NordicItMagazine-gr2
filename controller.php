@@ -3,9 +3,13 @@
 switch($_SERVER["REDIRECT_URL"]){
     case NULL:
         include "./modules/main/index.php";
+    break;
+    case '/css':
+    echo 'xxx';
     break;    
     case '/catalog':
         echo "Каталог магазина";
+        include "./modules/catalog/template.php";
     break;
     case '/basket':
         echo "Корзина магазина";
