@@ -27,7 +27,11 @@
 
         break;
         case 'card':
-           
+           include_once('./goods.php');
+           $goods = new goods;
+           $result = $goods -> getItem($_REQUEST['id']);
+           $data = $result -> fetch_assoc();
+           echo json_encode($data);
         break;
         case 'basket':
            include_once('./basket.php');
@@ -37,7 +41,6 @@
             $user = new User;
             $user -> save(false);
         case 'aut':
-            //var_dump($_REQUEST);
             include_once('./user.php'); 
             $user = new User;  
             $user -> login(false); 

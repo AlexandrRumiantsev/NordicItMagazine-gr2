@@ -4,10 +4,6 @@
 
 <div id='root-catalog'><div>
 <script>	
-    const link = document.createElement('link');
-	link.rel = 'stylesheet';
-	link.href = `${window.location.pathname}/style.css`;
-    document.head.appendChild(link);
 
 	function sendData(type, url, callback) {
 
@@ -30,7 +26,7 @@
 
 	function createElementGood(data){
 
-		
+
 		let containerCard = document.createElement('div');
         containerCard.className = `container-element ${data.img}`;
 
@@ -38,7 +34,8 @@
         imgCard.src = `${PROTOCOL}//${HOST}/img/catalog/${data.category}/${data.img}.jpg`;
         containerCard.appendChild(imgCard);
 
-        let titleCard = document.createElement('div');
+        let titleCard = document.createElement('a');
+        titleCard.href=`/card?${data.id}`;
         titleCard.className = 'container-element__title';
         titleCard.innerText = data.title;
         containerCard.appendChild(titleCard);

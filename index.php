@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Интернет-магазин</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
 <?php

@@ -1,18 +1,36 @@
 <?php
 error_reporting(E_ERROR);
 session_start();
-
-
 ?>
 <header>
     <nav>
         <div class="logo"></div>
         <ul>
-            <li><a href='#'>Женщинам</a></li>
-            <li><a href='#'>Мужчинам</a></li>
-            <li><a href='#'>Детям</a></li>
-            <li><a href='#'>Новинки</a></li>
-            <li><a href='#'>О Нас</a></li>
+            <li>
+                <a href='/catalog?category=woman'>
+                    Женщинам
+                </a>
+            </li>
+            <li>
+                <a href='/catalog?category=men'>
+                    Мужчинам
+                </a>
+            </li>
+            <li>
+                <a href='/catalog?category=children'>
+                    Детям
+                </a>
+            </li>
+            <li>
+                <a href='/catalog?category=new'>
+                    Новинки
+                </a>
+            </li>
+            <li>
+                <a href='#'>
+                    О Нас
+                </a>
+            </li>
         </ul>
         <div class='header__button'>
             <div class="header__enter">

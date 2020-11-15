@@ -100,6 +100,7 @@ const successAut = (data) => {
     sessionStorage.setItem('email', data['EMAIL']);
     enter.innerHTML = `${sessionStorage['login']} (Выйти)`;
     enter.removeEventListener("click", clickEnter)
+    console.log(data)
     enter.onclick = function(e){
         e.preventDefault();
         sessionStorage.removeItem('login');
