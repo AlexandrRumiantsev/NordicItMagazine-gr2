@@ -6,7 +6,10 @@
 
 <script type="text/javascript">
 
-	let globalData = {};
+	let globalData = {
+		countBasket: 0 
+	};
+	
 
 	const rootDetail = document.getElementById('root-detail');
 
@@ -67,19 +70,29 @@
 			//rootDetail.appendChild(rootSizes);
 
  			for (const property in sortable) {
-			 console.log(sortable[property][1]);
+			
 			 let size = document.createElement('div');
 			 size.className = 'size-element';
 			 size.innerText = sortable[property][1];
 
-			 //rootSizes.appendChild(size);
-			 rootSizes.insertAdjacentHTML('beforeend', size.innerHTML);
-			}
+			 size.onclick = function(event){
 
+			 	//3 варианта как взять ТЕКУЩИЙ элемент 
+			 	console.log(this)
+			 	console.log(size)
+			 	console.log(event.target);
+
+			 	size.classList.toggle('active');
+			 }
+
+			 rootSizes.appendChild(size);
+		
+			}
+			containerCard.appendChild(rootSizes)
 
  			}else{
  				let div = document.createElement('div');
-	 			div.className = `container-${data[index]}` 
+	 			div.className = `container-${index}` 
 	 			div.innerText = data[index];
 				containerCard.appendChild(div)
  			}
@@ -106,7 +119,20 @@
 					let addBasket = document.createElement('button');
 					addBasket.innerText = 'Добавить в корзину';
 					addBasket.onclick = () => {
-						console.log('ADD BASKET');
+
+						let prevState = localStorage.getItem(JSON.parse(data)['id'])
+
+						globalData.countBasket = prevState ? prevState : '';
+						
+						globalData.countBasket++;
+
+						localStorage.setItem(JSON.parse(data)['id'], globalData.countBasket);
+
+
+						
+
+						document.querySelector(".header__basket span").innerText = localStorage.length
+						
 					}
 					containerBtn.appendChild(addBasket);
 					rootDetail.appendChild(containerBtn);

@@ -38,8 +38,10 @@ session_start();
                 <a href="#">Войти</a>
             </div>
             <div class="header__basket">
+
             <img src="../img/icons/bascet.png">
-                <a href="#">Корзина (0)</a>
+            <a href="/basket">Корзина (<span>0</span>)</a>
+            
             </div>
             
         </div>

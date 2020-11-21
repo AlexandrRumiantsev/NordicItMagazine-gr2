@@ -9,6 +9,7 @@ switch($_SERVER["REDIRECT_URL"]){
     break;
     case '/basket':
         echo "Корзина магазина";
+        include "./modules/basket/template.php";
     break;
     case '/card':
         echo "Товар магазина";

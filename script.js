@@ -125,3 +125,9 @@ document.forms.aut.onsubmit = function(e){
         }
     )
 };
+
+
+const initStart = function(){
+    console.log(localStorage);
+    document.querySelector(".header__basket span").innerText = localStorage.length
+}()
