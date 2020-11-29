@@ -1,6 +1,7 @@
 <?php
      
-    error_reporting(E_ERROR);
+   ini_set('display_errors',1);
+error_reporting(E_ALL);
 
     switch ($_REQUEST['action']){
         case 'catalog':
@@ -45,6 +46,24 @@
             $user = new User;  
             $user -> login(false); 
         break;    
+        case 'add_good':
+            include_once('./goods.php');
+            $goods = new Goods; 
+            $goods -> save($_REQUEST);
+            
+        
+
+        /*
+        if ( $_FILES['file']['error'] > 0 ){
+            echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+                } else {
+                     $uploadfile = "/var/www/www-root/data/www/magazine.webvolt.ru/upload/".$_FILES['file']['name'];
+          move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
+        }
+        */
+        
+
+        break;
     }
     
 

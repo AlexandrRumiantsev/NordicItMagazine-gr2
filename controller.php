@@ -19,9 +19,12 @@ switch($_SERVER["REDIRECT_URL"]){
             include "./modules/card/template.php";
         }else echo 'Идентификатор товара не указан';
     break;
-    case '/chat':
-        echo __DIR__;
-        echo 'Чат проекта';
+    case '/admin':
+        echo 'Административная панель';
+        include "./modules/admin/template.php";
+    break;
+    case '/upload':
+        var_dump('asdsadasd');
     break;
     default:
        include "./modules/errors/404.php";

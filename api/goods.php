@@ -7,7 +7,7 @@ include_once 'db.php';
 * @subpackage classes
 * Класс goods, отвечает за работу с таблицей goods, в нашей базе данных.
 */
-class goods extends db{
+class Goods extends db{
      /** 
       * Шаблон пагинации
      */
@@ -23,26 +23,50 @@ class goods extends db{
      * @return null
      */
      function save($item){
-        var_dump("save");
-        $good = json_decode($item)->title;
-        $price = json_decode($item)->price;
-        $img = json_decode($item)->img;
-        $discription = json_decode($item)->discription;
-        $artikul = json_decode($item)->artikul;
+
         $id = uniqid();
-        $type = json_decode($item)->type;
-        $connect =  parent::extendConnect('localhost');
-       
+        $title= $item['title'];
+        $price = $item['price'];
+        $discription = $item['discr'];
+        $category = $item['category'];
+        //{"0":"34","1":"45","2":"54","3":"34"}
+        $size = '';
+        
+        $size .= '{';
+        foreach( $item['size'] as $key => $elem){
+            array_push($size, $elem);
+             $size .= '"'.$key.'":';
+             $size .= '"'.$elem.'"';
+             
+             if($key < count($item['size']) - 1 ){
+                 $size .= ',';
+             }
+        }
+        $size .= '}';
+  
+        if ( $_FILES['file']['error'] > 0 ){
+            echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+                } else {
+ 
+      $uploadfile = "/var/www/www-root/data/www/magazine.webvolt.ru/img/catalog/".$category."/".$_FILES['file']['name'];
+                   
+          move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
+        }
+        
+        $filename = $_FILES['file']['name'];
+        
         $sql = "INSERT INTO `goods`(
-                                 `id` , `title`,   `price`,     `img`  , `discr` , `article` , `category`
+                                 `id` , `title`,   `price`,     `img`  , `discr` , `sizes` , `category`
                             ) VALUES (  
-                                '$id' , '$good',  '$price' ,  '$img' , '$discription' , '$artikul' , '$type'
+                                '$id' , '$title',  '$price' ,  ' $filename' , '$discription' , '$size' , '$category'
                             )";
-                        
+                            
+                            
+        $connect = parent::extendConnect('localhost');                    
         $result = mysqli_query($connect, $sql); 
         if($result){
-            echo 'Запрос успешно сработал';
-        }else echo $sql .'ERRROR';      
+            //echo 'Запрос успешно сработал';
+        }else echo $sql .'ERRROR';                    
     }
     
     /**
