@@ -74,9 +74,6 @@ session_start();
         </button>
     </div>    
 </div>
-
-<!--<div class='overlay'>
+<div class='overlay'>
     <img src="/img/loader.gif">
-</div>-->
-
-
+</div>
