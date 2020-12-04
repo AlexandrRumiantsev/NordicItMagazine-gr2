@@ -75,9 +75,8 @@ session_start();
     </div>    
 </div>
 
-<div class='overlay'>
+<!--<div class='overlay'>
     <img src="/img/loader.gif">
-</div>
+</div>-->
 
-<script src='script.js'></script>
 

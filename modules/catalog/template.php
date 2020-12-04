@@ -5,27 +5,14 @@
 <div id='root-catalog'><div>
 <script>	
 
-	function sendData(type, url, callback) {
 
+/* Begin function block */
 
-	    const XHR = new XMLHttpRequest();
-	    XHR.addEventListener( "load", function(event) {
-	          
-	            (callback) ? callback(
-	                event.srcElement.response
-	            ) : '';
-
-	    });
-	    XHR.addEventListener( "error", function( event ) {
-	        console.log( 'Oops! Something went wrong.' );
-	    } );
-	    XHR.open( type , url );
-	    XHR.send();
-
-	}
-
+/**
+ * function sendFormData from header sait
+ * send form ajax to API
+ */
 	function createElementGood(data){
-
 
 		let containerCard = document.createElement('div');
         containerCard.className = `container-element ${data.img}`;
@@ -47,8 +34,14 @@
      	return containerCard;
 	}
 
+/* END function block */
+	
 
-	sendData(
+/* 
+ - getDataCatalog - get all goods from category
+*/    
+let initStartCatalog = function(){
+   getDataCatalog(
         'GET',
         `${PROTOCOL}//${HOST}/api/controller.php${window.location.search}&&action=catalog`,
         function(data){
@@ -61,6 +54,6 @@
         	});
         	
         }
-    )
-	
+    ) 
+}()
 </script>

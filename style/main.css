@@ -1,6 +1,6 @@
 @charset "UTF-8";
-body {
-  background: #F0EEEE;
+html body {
+  background-color: #F0EEEE;
 }
 
 body #overlay {
@@ -9,6 +9,11 @@ body #overlay {
   position: fixed;
   width: 100%;
   height: 100%;
+}
+
+html dl,html ol, html ul {
+    margin-top: 0;
+    margin-bottom: 0
 }
 
 body #overlay #form-reg {
@@ -24,10 +29,12 @@ body #overlay #form-reg {
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  background: #ededed;
+  
   padding: 45px;
 }
-
+.main-background{
+    background: #ededed;
+}
 body #overlay #form-reg h1 {
   text-align: center;
 }
@@ -51,8 +58,7 @@ body #overlay #form-reg input[type="submit"] {
 
 .container header {
   border-bottom: 1px solid #F2F1F1;
-  margin: 30px 0px;
-  padding: 25px 0px;
+
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

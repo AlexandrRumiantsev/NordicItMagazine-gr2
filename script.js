@@ -8,11 +8,20 @@
 5) Доделать функционал запомнить пароль, добавить запоминание в куки 
 */
 
+/* Begin Consts module */
+const buttons = document.querySelectorAll('.header__button a');
+const popupp = document.querySelector('.popupp-container');
+const autorize = popupp.querySelectorAll('button')[0];
+const reg = popupp.querySelectorAll('button')[1];
+const enter = buttons[0];
+/* END Consts module */
 
-const HOST = window.location.host;
-const PROTOCOL = window.location.protocol;
 
-
+/* Begin Function module */
+/**
+ * function panelSwitch
+ * switch active form from header
+ */
 const panelSwitch = function() {
     document.querySelector(
             '.popupp-container form.active'
@@ -20,79 +29,22 @@ const panelSwitch = function() {
     document.getElementById(this.dataset.to).classList.add('active');
 }
 
-const buttons = document.querySelectorAll('.header__button a');
 
-
-
-
-const popupp = document.querySelector('.popupp-container');
-
-const autorize = popupp.querySelectorAll('button')[0];
-const reg = popupp.querySelectorAll('button')[1];
-
+/**
+ * function clickEnter
+ * change active element
+ */
 const clickEnter = function(event){
     event.preventDefault();
     popupp.classList.toggle('active');
 }
 
-autorize.addEventListener("click", panelSwitch)
-reg.addEventListener("click", panelSwitch)
-
-const enter = buttons[0];
-enter.addEventListener("click", clickEnter);
 
 
-if(sessionStorage.getItem('login')){
-  
-  enter.innerHTML = `${sessionStorage.getItem('login')}(Выйти)`; 
-  enter.removeEventListener("click", clickEnter)
-  enter.onclick = function(e){
-    e.preventDefault();
-    sessionStorage.removeItem('login');
-    sessionStorage.removeItem('pass');
-    sessionStorage.removeItem('name');
-    sessionStorage.removeItem('email');
-    enter.innerHTML = 'Войти';
-    enter.addEventListener("click", clickEnter);
-   }
-}
-
-
-
-
-function sendData(form, type, url, callback) {
-
-    const overlay = document.querySelector('.overlay');
-
-    const XHR = new XMLHttpRequest();
-    XHR.addEventListener( "load", function(event) {
-          overlay.classList.remove('active');
-          popupp.classList.toggle('active');
-
-            (callback) ? callback(
-                event.srcElement.response
-            ) : '';
-
-    });
-    XHR.addEventListener( "error", function( event ) {
-        console.log( 'Oops! Something went wrong.' );
-    } );
-    XHR.open( type, url );
-    XHR.send( form );
-    overlay.classList.add('active');
-}
-
-
-document.forms.reg.onsubmit = function(e){
-    e.preventDefault();
-
-    sendData(
-        new FormData(this),
-        'POST',
-        `${PROTOCOL}//${HOST}/api/controller.php`
-    )
-};
-
+/**
+ * function successAut
+ * change locastore user and change form
+ */
 const successAut = (data) => {
     sessionStorage.setItem('login', data['LOGIN']);
     sessionStorage.setItem('pass', data['PASSWORD']);
@@ -100,7 +52,6 @@ const successAut = (data) => {
     sessionStorage.setItem('email', data['EMAIL']);
     enter.innerHTML = `${sessionStorage['login']} (Выйти)`;
     enter.removeEventListener("click", clickEnter)
-    console.log(data)
     enter.onclick = function(e){
         e.preventDefault();
         sessionStorage.removeItem('login');
@@ -112,22 +63,65 @@ const successAut = (data) => {
     }
 }
 
-document.forms.aut.onsubmit = function(e){
-    e.preventDefault();
-    sendData(
-        new FormData(this),
-        'POST',
-        `${PROTOCOL}//${HOST}/api/controller.php`,
-        function(response){
-            (response == "USER NOT FOUND") 
-            ? alert('Пользователь не найдер в системе')
-            : successAut(JSON.parse(response))
-        }
-    )
-};
+/* END Function module */
 
 
-const initStart = function(){
-    console.log(localStorage);
+
+/*
+    - Setting count in basket
+    - Click button auth  and reg form
+    - clickEnter - open form
+    - panelSwitch - switch form aut to reg and reg to auth
+    - sessionStorage User - setting sessionStorage User
+    - reg onsubmit
+    - auth onsubmit
+*/
+const initStartMain = function(){
+    
     document.querySelector(".header__basket span").innerText = localStorage.length
-}()
+    autorize.addEventListener("click", panelSwitch)
+    reg.addEventListener("click", panelSwitch)
+    enter.addEventListener("click", clickEnter);
+    
+    
+    if(sessionStorage.getItem('login')){
+      
+      enter.innerHTML = `${sessionStorage.getItem('login')}(Выйти)`; 
+      enter.removeEventListener("click", clickEnter)
+      enter.onclick = function(e){
+        e.preventDefault();
+        sessionStorage.removeItem('login');
+        sessionStorage.removeItem('pass');
+        sessionStorage.removeItem('name');
+        sessionStorage.removeItem('email');
+        enter.innerHTML = 'Войти';
+        enter.addEventListener("click", clickEnter);
+       }
+    }
+    
+    
+    document.forms.reg.onsubmit = function(e){
+        e.preventDefault();
+    
+        sendFormData(
+            new FormData(this),
+            'POST',
+            `${PROTOCOL}//${HOST}/api/controller.php`
+        )
+    };
+    
+    
+    document.forms.aut.onsubmit = function(e){
+        e.preventDefault();
+        sendFormData(
+            new FormData(this),
+            'POST',
+            `${PROTOCOL}//${HOST}/api/controller.php`,
+            function(response){
+                (response == "USER NOT FOUND") 
+                ? alert('Пользователь не найдер в системе')
+                : successAut(JSON.parse(response))
+            }
+        )
+    };
+}();
