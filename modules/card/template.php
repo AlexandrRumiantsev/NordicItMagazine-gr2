@@ -6,7 +6,7 @@
 <script type="text/javascript">
     /* Begin const */
     let globalData = {
-		countBasket: 0 
+		countBasket: 0
 	};
 	const rootDetail = document.getElementById('root-detail');
     /* END const */
@@ -14,8 +14,10 @@
 
 	/* Begin function */
  	function creatCard(data){
- 		let containerCard = document.createElement('div')
+ 		let containerCard = document.createElement('div');
+ 		
  		containerCard.className = 'detail__container container';
+ 		
  		let dataIndex = [
  			'title',
  			'category',
@@ -23,40 +25,73 @@
  			'img',
  			'id',
  			'price',
- 			'sizes'
+ 			'sizes',
+ 			'count'
  		];
  		
  		dataIndex.forEach(function(index){
  			if(index == 'sizes'){
-			const sizeData = JSON.parse(data[index])
-
-			let sortable = [];
-			for (let vehicle in sizeData) {
-			    sortable.push([vehicle, sizeData[vehicle]]);
-			}
-			sortable.sort(function(a, b) {
-			    return a[1] - b[1];
-			});
-			
-			let rootSizes = document.createElement('div');
-			rootSizes.className = 'root-sizes';
-
- 			for (const property in sortable) {
-			
-			 let size = document.createElement('div');
-			 size.className = 'size-element';
-			 size.innerText = sortable[property][1];
-
-			 size.onclick = function(event){
-			 	//3 варианта как взять ТЕКУЩИЙ элемент 
-			 	console.log(this)
-			 	console.log(size)
-			 	console.log(event.target);
-			 	size.classList.toggle('active');
-			 }
-			 rootSizes.appendChild(size);
-			}
-			containerCard.appendChild(rootSizes)
+    			const sizeData = JSON.parse(data[index])
+    
+    			let sortable = [];
+    			for (let vehicle in sizeData) {
+    			    sortable.push([vehicle, sizeData[vehicle]]);
+    			}
+    			sortable.sort(function(a, b) {
+    			    return a[1] - b[1];
+    			});
+    			
+    			let rootSizes = document.createElement('div');
+    			rootSizes.className = 'root-sizes';
+    
+     			for (const property in sortable) {
+    			
+    			 let size = document.createElement('div');
+    			 size.className = 'size-element';
+    			 size.innerText = sortable[property][1];
+    
+    			 size.onclick = function(event){
+    			 	//3 варианта как взять ТЕКУЩИЙ элемент 
+    			 	console.log(this)
+    			 	console.log(size)
+    			 	console.log(event.target);
+    			 	size.classList.toggle('active');
+    			 }
+    			 rootSizes.appendChild(size);
+    			}
+    			containerCard.appendChild(rootSizes)
+ 			}else if(index == 'count'){
+ 			    let containerCount = document.createElement('div');
+ 			    containerCount.classList = 'container-count';
+ 			    
+ 			    let resultCount = document.createElement('div');
+ 			    resultCount.innerText = 1;
+ 			    
+ 			    let minuseCount = document.createElement('button');
+ 			    minuseCount.innerText = '-';
+ 			    minuseCount.onclick = function(){
+     			    if(parseInt(resultCount.innerText) != 1){
+     			        resultCount.innerText = parseInt(resultCount.innerText) - 1;
+     			        globalData.countBasket = parseInt(resultCount.innerText);
+     			    }
+     			      
+     			      
+ 			    }
+ 			    
+ 			    let pluseCount = document.createElement('button');
+ 			    pluseCount.innerText = '+';
+ 			    pluseCount.onclick = function(){
+ 			      resultCount.innerText = parseInt(resultCount.innerText) + 1;
+ 			      globalData.countBasket = parseInt(resultCount.innerText);
+ 			    }
+ 			    
+ 			    
+ 			    
+ 			    containerCount.appendChild(minuseCount);
+ 			    containerCount.appendChild(resultCount);
+ 			    containerCount.appendChild(pluseCount);
+ 			    containerCard.appendChild(containerCount);
+ 			    
  			}else{
  				let div = document.createElement('div');
 	 			div.className = `container-${index}` 
@@ -77,7 +112,8 @@ const initStartCard = function() {
 		`${PROTOCOL}//${HOST}/api/controller.php?action=card&&id=${rootDetail.dataset.id}`,
 		function(data){
 			if(JSON.parse(data)){
-				creatCard(JSON.parse(data))
+    			    const finalData = JSON.parse(data);
+    				creatCard(finalData);
 				if(
 					sessionStorage.getItem('login')
 				){
@@ -87,12 +123,60 @@ const initStartCard = function() {
 					let addBasket = document.createElement('button');
 					addBasket.innerText = 'Добавить в корзину';
 					addBasket.onclick = () => {
-						let prevState = localStorage.getItem(JSON.parse(data)['id'])
-						globalData.countBasket = prevState ? prevState : '';
-						globalData.countBasket++;
-						localStorage.setItem(JSON.parse(data)['id'], globalData.countBasket);
-						document.querySelector(".header__basket span").innerText = localStorage.length
-						
+					    finalData.count = globalData.countBasket;
+					    sessionStorage.login
+					  
+					    let ad = localStorage.getItem(
+					        sessionStorage.login
+					    )
+					    
+					    
+					    if(!ad){
+					        const arResult = [];
+					        arResult.push(finalData);
+					        localStorage.setItem(
+    					        sessionStorage.login, 
+    					        JSON.stringify(arResult)
+					        );
+					    }else{
+					        const array = JSON.parse(ad) ;
+					        const found = array.find( (element, index) => {
+					            if(element.id === finalData.id){
+
+					                array[index] = finalData;
+					                localStorage.removeItem(sessionStorage.login);
+					                
+        					        localStorage.setItem(
+            					        sessionStorage.login, 
+            					        JSON.stringify(array)
+        					        );
+        					        return true;
+					            }
+					        });
+					        
+					        if(!found){
+					            const result = localStorage.getItem(
+        					        sessionStorage.login
+        					    );
+        					    const arrGood = JSON.parse(result);
+        					    arrGood.push(finalData);
+        					    let newFinalData = JSON.stringify(arrGood);
+        					    
+        					    localStorage.removeItem(
+        					        sessionStorage.login
+        					    );
+        					    
+        					     localStorage.setItem(
+        					        sessionStorage.login,
+        					        newFinalData
+        					    );
+        					    
+					        }
+
+					    }
+					    
+					    document.querySelector(".header__basket span").innerText = JSON.parse(localStorage.admin).length
+                        
 					}
 					containerBtn.appendChild(addBasket);
 					rootDetail.appendChild(containerBtn);

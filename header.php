@@ -49,19 +49,20 @@ session_start();
 </header>
 
 <div class='popupp-container'>
+    <div class='popupp-container__content'>
     <form id='aut' class='active'>
         <h2>Авторизация</h2>
-        <input name='login'></input>
-        <input name='pass'></input>
+        <input type='text' name='login'></input>
+        <input type='text' name='pass'></input>
         <input type='submit'></input>
         <input type='hidden' name='action' value='aut'></input>
     </form>
     <form id='reg'>
         <h2>Регистрация</h2>
-        <input name='login'></input>
-        <input name='pass'></input>
-        <input name='name'></input>
-        <input name='email'></input>
+        <input type='text' name='login'></input>
+        <input type='text' name='pass'></input>
+        <input type='text' name='name'></input>
+        <input type='text' name='email'></input>
         <input type='hidden' name='action' value='reg'></input>
         <input type='submit'></input>
     </form>
@@ -72,7 +73,8 @@ session_start();
         <button data-to='reg'>
             Регистрация
         </button>
-    </div>    
+    </div>  
+    </div>
 </div>
 <div class='overlay'>
     <img src="/img/loader.gif">

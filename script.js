@@ -78,7 +78,7 @@ const successAut = (data) => {
 */
 const initStartMain = function(){
     
-    document.querySelector(".header__basket span").innerText = localStorage.length
+    document.querySelector(".header__basket span").innerText = JSON.parse(localStorage.admin).length
     autorize.addEventListener("click", panelSwitch)
     reg.addEventListener("click", panelSwitch)
     enter.addEventListener("click", clickEnter);
