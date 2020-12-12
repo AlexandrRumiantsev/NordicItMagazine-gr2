@@ -1,8 +1,8 @@
 <?php
- echo 'Шаблон КАТАЛОГА' 
+ echo 'Шаблон КАТАЛОГА'
 ?>
 
-<div id='root-catalog'><div>
+<div id='root-catalog'></div>
 <script>	
 
 
@@ -19,7 +19,10 @@
 
         let imgCard = document.createElement('img');
         imgCard.src = `${PROTOCOL}//${HOST}/img/catalog/${data.category}/${data.img}.jpg`;
-        containerCard.appendChild(imgCard);
+        let imgContainer = document.createElement('div');
+        imgContainer.className = 'img-container';
+        imgContainer.appendChild(imgCard)
+        containerCard.appendChild(imgContainer);
 
         let titleCard = document.createElement('a');
         titleCard.href=`/card?${data.id}`;

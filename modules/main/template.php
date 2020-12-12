@@ -68,6 +68,7 @@ echo "Основная страница";
 
             <form id="mail_send">
                 <input name="mail" type="text" placeholder="email" />
+                <input type="hidden" name='action' value="mail" />
                 <input type="submit" value="Записаться" />
             </form>
             <span id="system-message"></span>

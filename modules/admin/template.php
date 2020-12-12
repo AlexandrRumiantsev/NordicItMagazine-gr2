@@ -59,5 +59,11 @@ function sendData(type, url, callback, form) {
 		},
 		document.forms.add_good
 	)
- }		
+ }
+ 
+ const initStartAdmin = function(){
+     
+     !sessionStorage.login ? document.forms.add_good.remove() : ``; 
+     
+ }();
 </script>

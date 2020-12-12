@@ -19,10 +19,10 @@
  		containerCard.className = 'detail__container container';
  		
  		let dataIndex = [
+            'img',
  			'title',
  			'category',
  			'discr',
- 			'img',
  			'id',
  			'price',
  			'sizes',
@@ -92,6 +92,19 @@
  			    containerCount.appendChild(pluseCount);
  			    containerCard.appendChild(containerCount);
  			    
+ 			}else if(index == 'img'){
+ 			    let div = document.createElement('div');
+	 			div.className = `container-${index}`;
+	 			
+	 			 let img = document.createElement('img');
+	 			 img.src = `${PROTOCOL}//${HOST}/img/catalog/${data.category}/${data.img}.jpg`;
+	 			 div.appendChild(img);
+	 			 containerCard.appendChild(div);
+	 			 
+	 			//div.innerText = data[index];
+	 			
+	 			console.log(data.category);
+				//containerCard.appendChild(div)
  			}else{
  				let div = document.createElement('div');
 	 			div.className = `container-${index}` 

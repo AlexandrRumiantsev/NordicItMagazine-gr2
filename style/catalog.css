@@ -17,7 +17,16 @@ header{
             flex-direction:column;
             align-items: center;
             justify-content:center;
-            height: 550px;
+            height: 350px;
+        }
+        .img-container{
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container-element img{
+            width: 100%;
         }
         .container-element__imgContainer{
             width: 75%;
@@ -29,7 +38,7 @@ header{
         }
         .container-element__img{
             width: 90%;
-            height: auto%;
+            height: auto;
         }
         .container-element__title{
             font-weight: bold;

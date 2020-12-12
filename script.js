@@ -61,6 +61,8 @@ const successAut = (data) => {
         enter.innerHTML = 'Войти';
         enter.addEventListener("click", clickEnter);   
     }
+    //Финт костыль
+    //window.location.href = window.location.href;
 }
 
 /* END Function module */
@@ -78,14 +80,18 @@ const successAut = (data) => {
 */
 const initStartMain = function(){
     
-    document.querySelector(".header__basket span").innerText = JSON.parse(localStorage.admin).length
+    if(sessionStorage.getItem('login')){
+        document.querySelector(".header__basket span").innerText = JSON.parse( localStorage[sessionStorage.getItem('login')] ).length;
+    }
+        
+    
     autorize.addEventListener("click", panelSwitch)
     reg.addEventListener("click", panelSwitch)
-    enter.addEventListener("click", clickEnter);
+    
+    document.querySelector(".header__enter a").addEventListener("click", clickEnter);
     
     
     if(sessionStorage.getItem('login')){
-      
       enter.innerHTML = `${sessionStorage.getItem('login')}(Выйти)`; 
       enter.removeEventListener("click", clickEnter)
       enter.onclick = function(e){
@@ -124,4 +130,32 @@ const initStartMain = function(){
             }
         )
     };
+    
+    if(document.forms.mail_send)
+    document.forms.mail_send.onsubmit = function(e){
+        e.preventDefault();
+        /*
+            //1 вариант
+            console.log(this);
+            //2 вариант
+            console.log(document.forms.mail_send);
+            //3 вариант
+            console.log(document.querySelector("form[id=mail_send]"));
+            //4 вариант
+            console.log(document.getElementById("mail_send"));
+            //5 вариант
+            console.log(e.target);
+        */
+        sendFormData(
+            new FormData(this),
+            'POST',
+            `${PROTOCOL}//${HOST}/api/controller.php`,
+            function(response){
+                //Временный костыль
+                popupp.classList.remove('active');
+                response == 1 ? alert('Ваше подписка успешно оформлена!') : alert('Ошибка! Обратитесь в тех. поддержку');
+            }
+        )
+        
+    }
 }();

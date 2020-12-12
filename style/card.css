@@ -1,3 +1,55 @@
 .detail__container{
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+}
+.container-title{
+    font-size: xx-large;
+}
+.container-category{
+    display: none;
+}
+.container-price {
+    font-style: italic;
+    padding: 15px 0px;
+}
+.container-price::after{
+    content: " руб."
+}
+.container-id:before{
+    content: "Артикул №";
+    color: gray;
+}
+.container-id{
+    color: gray;
+}
+.container-count{
+    display: flex;
+}
+.container-count div{
+    padding: 0 15px;
+}
+.root-sizes{
+    display: flex;
+    margin-bottom: 20px;
+}
+.size-element{
+    margin: 0 10px;
+    border: 1px solid black;
+    padding: 3px 5px;
+    cursor:pointer;
+}
+.container-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-btn burron{
+    padding: 15px;
+    background-color: orange;
+    color: white;
+}
+.size-element.active{
+    outline:1px solid red;
 }

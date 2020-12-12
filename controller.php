@@ -1,4 +1,5 @@
 <?php
+
 switch($_SERVER["REDIRECT_URL"]){
     case NULL:
         include "./modules/main/template.php";

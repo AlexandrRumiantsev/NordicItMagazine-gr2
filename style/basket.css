@@ -1,0 +1,26 @@
+.basket__item, .basket__item div{
+    display: flex;
+    align-items: center;
+}
+.basket__item--size{
+    overflow: hidden;
+}
+.basket__item--name{
+    justify-content: left;
+}
+.col-titles{
+    margin-bottom: 35px;
+}
+.col-titles div{
+    color: gray;
+}
+.basket-title{
+    text-align: center;
+    font-size: 65px;
+}
+.basket-subtitle{
+    color: gray;
+    text-align: center;
+    margin-bottom: 90px;
+    font-style: italic;
+}
